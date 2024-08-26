@@ -3,11 +3,6 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/test/java/ru/inno/todo/servis/Task.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/test/java/ru/inno/todo/servis/ToDoHelper.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/test/java/ru/inno/todo/servis/ToDoHelperApache.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/test/java/ru/inno/todo/tests/MyTestsBusiness.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/test/java/ru/inno/todo/tests/MyTestsContract.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/test/resources/README.md" charset="UTF-8" />
   </component>
 </project>

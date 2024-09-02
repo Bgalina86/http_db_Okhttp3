@@ -22,7 +22,7 @@ public class ToDoBusinessTests {
     }
 
     @Test
-    @DisplayName("Я могу удалить задачу")
+    @DisplayName("РЇ РјРѕРіСѓ СѓРґР°Р»РёС‚СЊ Р·Р°РґР°С‡Сѓ")
     public void iCanDeleteMyTask() throws IOException {
         Task task = service.createNewTask();
         service.deleteTask(task);
@@ -32,7 +32,7 @@ public class ToDoBusinessTests {
     }
 
     @Test
-    @DisplayName("Я могу отметить задачу выполненной")
+    @DisplayName("РЇ РјРѕРіСѓ РѕС‚РјРµС‚РёС‚СЊ Р·Р°РґР°С‡Сѓ РІС‹РїРѕР»РЅРµРЅРЅРѕР№")
     public void iCanSetMyTaskCompleted() throws IOException {
         Task myTask = service.createNewTask();
         service.setCompleted(myTask);

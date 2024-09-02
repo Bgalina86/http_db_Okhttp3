@@ -1,10 +1,7 @@
 package ru_inno.x_clients;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.blankString;
-import static org.hamcrest.Matchers.greaterThan;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.*;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;

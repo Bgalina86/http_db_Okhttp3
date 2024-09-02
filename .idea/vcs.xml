@@ -2,5 +2,8 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/swagger-codegen" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/swagger/swagger-codegen" vcs="" />
+    <mapping directory="$PROJECT_DIR$/swagger/swagger-codegen/swagger-codegen" vcs="" />
   </component>
 </project>

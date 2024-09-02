@@ -36,15 +36,15 @@ public class ToDoHelperOkHttp implements ToDoHelper {
 
     @Override
     public Task createAddTask(String myContent) throws IOException {
-        //создние задачи
+        //СЃРѕР·РґРЅРёРµ Р·Р°РґР°С‡Рё
         Task newTask = createNewTask();
-        // Выделяем id
+        // Р’С‹РґРµР»СЏРµРј id
         int id = newTask.id();
-        //определяем тело запроса
+        //РѕРїСЂРµРґРµР»СЏРµРј С‚РµР»Рѕ Р·Р°РїСЂРѕСЃР°
         RequestBody body = RequestBody.create(myContent, MyMediaTypes.JSON);
-        // Составляем запрос с новым телом
+        // РЎРѕСЃС‚Р°РІР»СЏРµРј Р·Р°РїСЂРѕСЃ СЃ РЅРѕРІС‹Рј С‚РµР»РѕРј
         Request request = new Request.Builder().url(ConfProperties.getProperty("db.host") + "/" + id).patch(body).build();
-        //отправляем запрос
+        //РѕС‚РїСЂР°РІР»СЏРµРј Р·Р°РїСЂРѕСЃ
         Response response = client.newCall(request).execute();
 
         Request getAll = new Request.Builder().get().url(

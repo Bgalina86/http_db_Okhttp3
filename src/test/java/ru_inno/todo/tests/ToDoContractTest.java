@@ -18,7 +18,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class ToDoContractTest {
-    // TODO: определять из файла | Owner
+    // TODO: РѕРїСЂРµРґРµР»СЏС‚СЊ РёР· С„Р°Р№Р»Р° | Owner
     private static final String URL = "https://todo-app-sky.herokuapp.com";
 
     private HttpClient client;
@@ -29,15 +29,15 @@ public class ToDoContractTest {
     }
 
     @Test
-    @DisplayName("Получение списка задач. Проверяем статус-код и заголовок Content-Type")
+    @DisplayName("РџРѕР»СѓС‡РµРЅРёРµ СЃРїРёСЃРєР° Р·Р°РґР°С‡. РџСЂРѕРІРµСЂСЏРµРј СЃС‚Р°С‚СѓСЃ-РєРѕРґ Рё Р·Р°РіРѕР»РѕРІРѕРє Content-Type")
     public void shouldReceive200OnGetRequest() throws IOException {
-        // Запрос
+        // Р—Р°РїСЂРѕСЃ
         HttpGet getListReq = new HttpGet(URL);
-        // Получить ответ
+        // РџРѕР»СѓС‡РёС‚СЊ РѕС‚РІРµС‚
         HttpResponse response = client.execute(getListReq);
         String body = EntityUtils.toString(response.getEntity());
 
-        // Проверить поля ответа
+        // РџСЂРѕРІРµСЂРёС‚СЊ РїРѕР»СЏ РѕС‚РІРµС‚Р°
         assertEquals(200, response.getStatusLine().getStatusCode());
         assertEquals(1, response.getHeaders("Content-Type").length);
         assertEquals("application/json; charset=utf-8", response.getHeaders("Content-Type")[0].getValue());
@@ -46,12 +46,12 @@ public class ToDoContractTest {
     }
 
     @Test
-    @DisplayName("Создание задачи. Проверяем статус-код, заголовок Content-Type и тело ответа содержит json")
+    @DisplayName("РЎРѕР·РґР°РЅРёРµ Р·Р°РґР°С‡Рё. РџСЂРѕРІРµСЂСЏРµРј СЃС‚Р°С‚СѓСЃ-РєРѕРґ, Р·Р°РіРѕР»РѕРІРѕРє Content-Type Рё С‚РµР»Рѕ РѕС‚РІРµС‚Р° СЃРѕРґРµСЂР¶РёС‚ json")
     public void shouldReceive201OnPostRequest() throws IOException {
         HttpResponse response = createNewTask();
         String body = EntityUtils.toString(response.getEntity());
 
-        // Проверить поля ответа
+        // РџСЂРѕРІРµСЂРёС‚СЊ РїРѕР»СЏ РѕС‚РІРµС‚Р°
         assertEquals(200, response.getStatusLine().getStatusCode());
         assertEquals(1, response.getHeaders("Content-Type").length);
         assertEquals("application/json; charset=utf-8", response.getHeaders("Content-Type")[0].getValue());
@@ -60,25 +60,25 @@ public class ToDoContractTest {
     }
 
     @Test
-    @DisplayName("Создание задачи с пустым телом запроса. Статус-код = 400, в теле ответа есть сообщение об ошибке")
+    @DisplayName("РЎРѕР·РґР°РЅРёРµ Р·Р°РґР°С‡Рё СЃ РїСѓСЃС‚С‹Рј С‚РµР»РѕРј Р·Р°РїСЂРѕСЃР°. РЎС‚Р°С‚СѓСЃ-РєРѕРґ = 400, РІ С‚РµР»Рµ РѕС‚РІРµС‚Р° РµСЃС‚СЊ СЃРѕРѕР±С‰РµРЅРёРµ РѕР± РѕС€РёР±РєРµ")
     public void shouldReceive400OnEmptyPost() throws IOException {
-        // Запрос
+        // Р—Р°РїСЂРѕСЃ
         HttpPost createItemReq = new HttpPost(URL);
 
-        // Получить ответ
+        // РџРѕР»СѓС‡РёС‚СЊ РѕС‚РІРµС‚
         HttpResponse response = client.execute(createItemReq);
         String bodyAsIs = EntityUtils.toString(response.getEntity());
 
-        // Проверить поля ответа
+        // РџСЂРѕРІРµСЂРёС‚СЊ РїРѕР»СЏ РѕС‚РІРµС‚Р°
         assertEquals(1, response.getHeaders("Content-Type").length);
         assertEquals("application/json; charset=utf-8", response.getHeaders("Content-Type")[0].getValue());
         assertTrue(bodyAsIs.endsWith(",\"title\":null,\"completed\":null}"));
     }
 
     @Test
-    @DisplayName("Удаляет существующую задачу. Статус 204, Content-Length=0")
+    @DisplayName("РЈРґР°Р»СЏРµС‚ СЃСѓС‰РµСЃС‚РІСѓСЋС‰СѓСЋ Р·Р°РґР°С‡Сѓ. РЎС‚Р°С‚СѓСЃ 204, Content-Length=0")
     public void shouldReceive204OnDelete() throws IOException {
-        // создать задачу, которую будем удалять
+        // СЃРѕР·РґР°С‚СЊ Р·Р°РґР°С‡Сѓ, РєРѕС‚РѕСЂСѓСЋ Р±СѓРґРµРј СѓРґР°Р»СЏС‚СЊ
         HttpResponse newTask = createNewTask();
         String body = EntityUtils.toString(newTask.getEntity());
         String id = "/" + body.substring(6, 10); // {"id":12364,"title":"test","completed":null}
@@ -91,16 +91,16 @@ public class ToDoContractTest {
         assertEquals("\"todo was deleted\"", EntityUtils.toString(response.getEntity()));
     }
 
-    //TODO: Нужен класс! Е.Машкина
+    //TODO: РќСѓР¶РµРЅ РєР»Р°СЃСЃ! Р•.РњР°С€РєРёРЅР°
     private HttpResponse createNewTask() throws IOException {
-        // Запрос
+        // Р—Р°РїСЂРѕСЃ
         HttpPost createItemReq = new HttpPost(URL);
 
         String myContent = "{\"title\" : \"test\"}";
         StringEntity entity = new StringEntity(myContent, ContentType.APPLICATION_JSON);
         createItemReq.setEntity(entity);
 
-        // Получить ответ
+        // РџРѕР»СѓС‡РёС‚СЊ РѕС‚РІРµС‚
         return client.execute(createItemReq);
     }
 }

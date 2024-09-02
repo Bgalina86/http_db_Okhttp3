@@ -11,12 +11,16 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
+
     <junit.version>5.7.1</junit.version>
+
   </properties>
 
   <dependencies>
+
     <dependency>
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-controls</artifactId>
@@ -58,12 +62,7 @@
       <version>4.1.4</version>
       <scope>test</scope>
     </dependency>
-    <dependency>
-      <groupId>ru.inno.todo</groupId>
-      <artifactId>http_db</artifactId>
-      <version>1.0-SNAPSHOT</version>
-      <scope>test</scope>
-    </dependency>
+
     <!-- https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp -->
     <dependency>
       <groupId>com.squareup.okhttp3</groupId>
@@ -77,6 +76,12 @@
       <version>5.5.0</version>
       <scope>test</scope>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>2.16.1</version>
+    </dependency>
 
     <dependency>
       <groupId>com.atlassian.oai</groupId>
@@ -84,7 +89,52 @@
       <version>2.41.0</version>
     </dependency>
 
+<!--    &lt;!&ndash; https://mvnrepository.com/artifact/io.swagger.codegen.v3/swagger-codegen &ndash;&gt;-->
+<!--    <dependency>-->
+<!--      <groupId>io.swagger.codegen.v3</groupId>-->
+<!--      <artifactId>swagger-codegen</artifactId>-->
+<!--      <version>3.0.61</version>-->
+<!--    </dependency>-->
+<!--    &lt;!&ndash; https://mvnrepository.com/artifact/io.swagger.codegen.v3/swagger-codegen-maven-plugin &ndash;&gt;-->
+    <dependency>
+      <groupId>io.swagger.codegen.v3</groupId>
+      <artifactId>swagger-codegen-maven-plugin</artifactId>
+      <version>3.0.61</version>
+    </dependency>
+<!--    &lt;!&ndash; https://mvnrepository.com/artifact/io.swagger.codegen.v3/swagger-codegen-generators &ndash;&gt;-->
+<!--    <dependency>-->
+<!--      <groupId>io.swagger.codegen.v3</groupId>-->
+<!--      <artifactId>swagger-codegen-generators</artifactId>-->
+<!--      <version>1.0.51</version>-->
+<!--    </dependency>-->
+
   </dependencies>
 
-
+<!--  <build>-->
+<!--    <plugins>-->
+<!--      <plugin>-->
+<!--        <groupId>io.swagger.codegen.v3</groupId>-->
+<!--        <artifactId>swagger-codegen-maven-plugin</artifactId>-->
+<!--        <version>3.0.61</version>-->
+<!--        <executions>-->
+<!--          <execution>-->
+<!--            <goals>-->
+<!--              <goal>generate</goal>-->
+<!--            </goals>-->
+<!--            <configuration>-->
+<!--              <inputSpec>${project.basedir}/src/test/resources/models.java</inputSpec>-->
+<!--              <language>java</language>-->
+<!--              <output>${project.build.directory}/generated-sources/</output>-->
+<!--              <generateSupportingFiles>false</generateSupportingFiles>-->
+<!--              <apiPackage>com.myorg.petservice.api</apiPackage>-->
+<!--              <modelPackage>com.myorg.petservice.models</modelPackage>-->
+<!--              <configOptions>-->
+<!--                <interfaceOnly>true</interfaceOnly>-->
+<!--              </configOptions>-->
+<!--            </configuration>-->
+<!--          </execution>-->
+<!--        </executions>-->
+<!--      </plugin>-->
+<!--    </plugins>-->
+<!--  </build>-->
 </project>

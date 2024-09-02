@@ -1,0 +1,686 @@
+{
+  openapi: "3.0.0",
+  paths: {
+    /auth/login: {
+      post: {
+        operationId: "AuthController_login",
+        summary: "Авторизация",
+        parameters: [ ],
+        requestBody: {
+          required: true,
+          content: {
+            application/json: {
+              schema: {
+                $ref: "#/components/schemas/AuthRequest"
+              }
+            }
+          }
+        },
+        responses: {
+          201: {
+            description: "",
+            content: {
+              application/json: {
+                schema: {
+                  $ref: "#/components/schemas/AuthResponse"
+                }
+              }
+            }
+          }
+        },
+        tags: [
+            "auth"
+        ]
+      }
+    },
+    /company: {
+      get: {
+        operationId: "CompanyController_getAll",
+        summary: "Получить список компаний",
+        parameters: [
+          {
+            name: "active",
+            required: false,
+            in: "query",
+            description: "Показать только активные",
+            schema: {
+              type: "boolean"
+            }
+          }
+        ],
+        responses: {
+          200: {
+            description: "",
+            content: {
+              application/json: {
+                schema: {
+                  type: "array",
+                  items: {
+                    $ref: "#/components/schemas/Company"
+                  }
+                }
+              }
+            }
+          }
+        },
+        tags: [
+            "company"
+        ]
+      },
+      post: {
+        operationId: "CompanyController_add",
+        summary: "Добавить новую компанию",
+        description: "<font color="#eb7f99" size="4">admin only</font>",
+        parameters: [
+          {
+            name: "x-client-token",
+            in: "header",
+            description: "Авторизационный токен",
+            required: true,
+            schema: {
+              type: "string"
+            }
+          }
+        ],
+        requestBody: {
+          required: true,
+          content: {
+            application/json: {
+              schema: {
+                $ref: "#/components/schemas/CreateCompanyDto"
+              }
+            }
+          }
+        },
+        responses: {
+          201: {
+            description: "",
+            content: {
+              application/json: {
+                schema: {
+                  $ref: "#/components/schemas/Entity"
+                }
+              }
+            }
+          }
+        },
+        tags: [
+            "company"
+        ]
+      }
+    },
+           /company/{id}: {
+    get: {
+      operationId: "CompanyController_getById",
+      summary: "Получить конкретную компанию",
+      parameters: [
+        {
+          name: "id",
+          required: true,
+          in: "path",
+          description: "id компании",
+          schema: {
+            type: "number"
+          }
+        }
+      ],
+      responses: {
+        200: {
+          description: "",
+          content: {
+            application/json: {
+              schema: {
+                $ref: "#/components/schemas/Company"
+              }
+            }
+          }
+        },
+        404: {
+          description: "Компания не найдена"
+        }
+      },
+      tags: [
+          "company"
+      ]
+    },
+    patch: {
+      operationId: "CompanyController_update",
+      summary: "Изменить информацию по комании",
+      description: "<font color="#eb7f99" size="4">admin only</font>",
+      parameters: [
+        {
+          name: "id",
+          required: true,
+          in: "path",
+          description: "id компании",
+          schema: {
+            type: "number"
+          }
+        },
+        {
+          name: "x-client-token",
+          in: "header",
+          description: "Авторизационный токен",
+          required: true,
+          schema: {
+            type: "string"
+          }
+        }
+      ],
+      requestBody: {
+        required: true,
+        content: {
+          application/json: {
+            schema: {
+              $ref: "#/components/schemas/UpdateCompanyDto"
+            }
+          }
+        }
+      },
+      responses: {
+        202: {
+          description: "",
+          content: {
+            application/json: {
+              schema: {
+                $ref: "#/components/schemas/Company"
+              }
+            }
+          }
+        },
+        404: {
+          description: "Компания не найдена"
+        }
+      },
+      tags: [
+          "company"
+      ]
+    }
+  },
+           /company/delete/{id}: {
+    get: {
+      operationId: "CompanyController_delete",
+      summary: "Удалить компанию",
+      description: "<font color="#eb7f99" size="4">admin only</font>",
+      parameters: [
+        {
+          name: "id",
+          required: true,
+          in: "path",
+          description: "id компании",
+          schema: {
+            type: "number"
+          }
+        },
+        {
+          name: "x-client-token",
+          in: "header",
+          description: "Авторизационный токен",
+          required: true,
+          schema: {
+            type: "string"
+          }
+        }
+      ],
+      responses: {
+        200: {
+          description: "",
+          content: {
+            application/json: {
+              schema: {
+                $ref: "#/components/schemas/Company"
+              }
+            }
+          }
+        },
+        404: {
+          description: "Компания не найдена"
+        }
+      },
+      tags: [
+          "company"
+      ]
+    }
+  },
+           /company/status/{id}: {
+    patch: {
+      operationId: "CompanyController_setStatus",
+      summary: "(Де)активировать команию",
+      description: "<font color="#eb7f99" size="4">admin only</font><br />true = комания активна, false = комания неактивна",
+      parameters: [
+        {
+          name: "id",
+          required: true,
+          in: "path",
+          description: "id компании",
+          schema: {
+            type: "number"
+          }
+        },
+        {
+          name: "x-client-token",
+          in: "header",
+          description: "Авторизационный токен",
+          required: true,
+          schema: {
+            type: "string"
+          }
+        }
+      ],
+      requestBody: {
+        required: true,
+        content: {
+          application/json: {
+            schema: {
+              $ref: "#/components/schemas/UpdateCompanyStatusDto"
+            }
+          }
+        }
+      },
+      responses: {
+        201: {
+          description: "",
+          content: {
+            application/json: {
+              schema: {
+                $ref: "#/components/schemas/Company"
+              }
+            }
+          }
+        },
+        404: {
+          description: "Компания не найдена"
+        }
+      },
+      tags: [
+          "company"
+      ]
+    }
+  },
+    /employee: {
+      get: {
+        operationId: "EmployeeController_findAll",
+        summary: "Получить список сотрудников для компании",
+        parameters: [
+          {
+            name: "company",
+            required: true,
+            in: "query",
+            description: "id компании",
+            schema: {
+              type: "number"
+            }
+          }
+        ],
+        responses: {
+          200: {
+            description: "",
+            content: {
+              application/json: {
+                schema: {
+                  type: "array",
+                  items: {
+                    $ref: "#/components/schemas/Employee"
+                  }
+                }
+              }
+            }
+          }
+        },
+        tags: [
+            "employee"
+        ]
+      },
+      post: {
+        operationId: "EmployeeController_create",
+        summary: "Добавить нового сотрудника",
+        parameters: [
+          {
+            name: "x-client-token",
+            in: "header",
+            description: "Авторизационный токен",
+            required: true,
+            schema: {
+              type: "string"
+            }
+          }
+        ],
+        requestBody: {
+          required: true,
+          content: {
+            application/json: {
+              schema: {
+                $ref: "#/components/schemas/Employee"
+              }
+            }
+          }
+        },
+        responses: {
+          201: {
+            description: "",
+            content: {
+              application/json: {
+                schema: {
+                  $ref: "#/components/schemas/Entity"
+                }
+              }
+            }
+          }
+        },
+        tags: [
+            "employee"
+        ]
+      }
+    },
+           /employee/{id}: {
+    get: {
+      operationId: "EmployeeController_findOne",
+      summary: "Получить сотрудника по id",
+      parameters: [
+        {
+          name: "id",
+          required: true,
+          in: "path",
+          description: "id сотрудника",
+          schema: {
+            type: "number"
+          }
+        }
+      ],
+      responses: {
+        200: {
+          description: "",
+          content: {
+            application/json: {
+              schema: {
+                $ref: "#/components/schemas/Employee"
+              }
+            }
+          }
+        },
+        404: {
+          description: "Сотрудник не найден"
+        }
+      },
+      tags: [
+          "employee"
+      ]
+    },
+    patch: {
+      operationId: "EmployeeController_update",
+      summary: "Изменить информацию о сотруднике",
+      parameters: [
+        {
+          name: "id",
+          required: true,
+          in: "path",
+          description: "id сотрудника",
+          schema: {
+            type: "number"
+          }
+        },
+        {
+          name: "x-client-token",
+          in: "header",
+          description: "Авторизационный токен",
+          required: true,
+          schema: {
+            type: "string"
+          }
+        }
+      ],
+      requestBody: {
+        required: true,
+        content: {
+          application/json: {
+            schema: {
+              $ref: "#/components/schemas/UpdateEmployeeDto"
+            }
+          }
+        }
+      },
+      responses: {
+        201: {
+          description: "",
+          content: {
+            application/json: {
+              schema: {
+                $ref: "#/components/schemas/Employee"
+              }
+            }
+          }
+        },
+        404: {
+          description: "Сотрудник не найден"
+        }
+      },
+      tags: [
+          "employee"
+      ]
+    }
+  },
+    /test-data: {
+      get: {
+        operationId: "TestDataController_refreshDB",
+        summary: "Пересоздать список компаний и пользователей. Очистить талицу, добавить 5 компаний, 15 пользователей",
+        parameters: [ ],
+        responses: {
+          200: {
+            description: ""
+          }
+        }
+      }
+    }
+  },
+  info: {
+    title: "X-Clients",
+    description: "<h2>Сервис записи на прием к профильным специалистам.</h2><h3><a href="/docs-json">Документация в формате JSON</a></h3>",
+    version: "1.0",
+    contact: { }
+  },
+  tags: [ ],
+  servers: [ ],
+  components: {
+    schemas: {
+      AuthRequest: {
+        type: "object",
+        properties: {
+          username: {
+            type: "string",
+            description: "Логин"
+          },
+          password: {
+            type: "string",
+            description: "Пароль"
+          }
+        },
+        required: [
+            "username",
+            "password"
+        ]
+      },
+      AuthResponse: {
+        type: "object",
+        properties: {
+          userToken: {
+            type: "string",
+            description: "Токен"
+          },
+          role: {
+            type: "string",
+            description: "Роль",
+            enum: [
+                "admin",
+                "emp",
+                "client"
+            ]
+          },
+          displayName: {
+            type: "string"
+          },
+          login: {
+            type: "string"
+          }
+        },
+        required: [
+            "userToken",
+            "role",
+            "displayName",
+            "login"
+        ]
+      },
+      Company: {
+        type: "object",
+        properties: {
+          id: {
+            type: "number"
+          },
+          name: {
+            type: "string",
+            description: "Название компании"
+          },
+          description: {
+            type: "string",
+            description: "Слоган или описание"
+          },
+          isActive: {
+            type: "boolean",
+            description: "Статус команий. false = неактивна.",
+            default: true
+          }
+        },
+        required: [
+            "id",
+            "name",
+            "isActive"
+        ]
+      },
+      CreateCompanyDto: {
+        type: "object",
+        properties: {
+          name: {
+            type: "string",
+            description: "Название компании"
+          },
+          description: {
+            type: "string",
+            description: "Слоган или описание"
+          }
+        }
+      },
+      Entity: {
+        type: "object",
+        properties: {
+          id: {
+            type: "number"
+          }
+        },
+        required: [
+            "id"
+        ]
+      },
+      UpdateCompanyStatusDto: {
+        type: "object",
+        properties: {
+          isActive: {
+            type: "boolean",
+            description: "Статус команий. false = неактивна.",
+            default: true
+          }
+        }
+      },
+      UpdateCompanyDto: {
+        type: "object",
+        properties: {
+          name: {
+            type: "string",
+            description: "Название компании"
+          },
+          description: {
+            type: "string",
+            description: "Слоган или описание"
+          }
+        }
+      },
+      Employee: {
+        type: "object",
+        properties: {
+          id: {
+            type: "number"
+          },
+          firstName: {
+            type: "string",
+            description: "Имя специалиста"
+          },
+          lastName: {
+            type: "string",
+            description: "Фамилия специалиста"
+          },
+          middleName: {
+            type: "string",
+            description: "Отчество специалиста"
+          },
+          companyId: {
+            type: "number",
+            description: "id компании"
+          },
+          email: {
+            type: "string",
+            description: "Email для уведомлений"
+          },
+          url: {
+            type: "string",
+            description: "URL изображения"
+          },
+          phone: {
+            type: "string",
+            description: "Номер телефона"
+          },
+          birthdate: {
+            format: "date-time",
+            type: "string",
+            description: "Дата рождения"
+          },
+          isActive: {
+            type: "boolean",
+            description: "Статус сотрудника. false = неактивен.",
+            default: true
+          }
+        },
+        required: [
+            "id",
+            "firstName",
+            "lastName",
+            "companyId",
+            "isActive"
+        ]
+      },
+      UpdateEmployeeDto: {
+        type: "object",
+        properties: {
+          lastName: {
+            type: "string",
+            description: "Фамилия специалиста"
+          },
+          email: {
+            type: "string",
+            description: "Email для уведомлений"
+          },
+          url: {
+            type: "string",
+            description: "URL изображения"
+          },
+          phone: {
+            type: "string",
+            description: "Номер телефона"
+          },
+          isActive: {
+            type: "boolean",
+            description: "Статус сотрудника. false = неактивен.",
+            default: true
+          }
+        }
+      }
+    }
+  }
+}

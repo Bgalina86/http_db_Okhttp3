@@ -1,0 +1,12 @@
+//    Подключение к БД
+//    postgresql://x_clients_user:95PM5lQE0NfzJWDQmLjbZ45ewrz1fLYa@dpg-cqsr9ulumphs73c2q40g-a.frankfurt-postgres.render.com/x_clients_db_fxd0
+//
+//DRIVER://LOGIN:PASS@HOST/DBNAME
+//DRIVER://LOGIN:PASS@HOST:PORT/DBNAME
+//
+//HOSTNAME dpg-cqsr9ulumphs73c2q40g-a.frankfurt-postgres.render.com
+//PORT
+//DB NAME x_clients_db_fxd0
+//LOGIN x_clients_user
+//PASS 95PM5lQE0NfzJWDQmLjbZ45ewrz1fLYa
+//DRIVER MySQL | oracle | PostgreSQL | MSSQL

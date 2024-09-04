@@ -42,7 +42,7 @@ public class MyTestsContract {
     @BeforeEach
     public void setUp() {
         properties = new ConfProperties();
-        properties.getProperty("db.host");
+        //properties.getProperty("db.host");
         client = HttpClientBuilder.create().build();
     }
 

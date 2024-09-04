@@ -6,9 +6,11 @@ import static org.hamcrest.Matchers.*;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ru_inno.todo.servis.ConfProperties;
 import ru_inno.x_clients.helper.CompanyApiHelper;
 import ru_inno.x_clients.model.AuthResponse;
 import ru_inno.x_clients.model.CreateCompanyRequest;
@@ -16,19 +18,24 @@ import ru_inno.x_clients.model.CreateCompanyResponse;
 
 public class CompanyContractTest {
 
-    CompanyApiHelper helper;
+    private static ConfProperties properties;
 
+    CompanyApiHelper helper;
+    @BeforeEach
+    public void setUpL() {
+
+        helper = new CompanyApiHelper();
+    }
+    
     @BeforeAll
     public static void setUp() {
-        RestAssured.baseURI = "https://x-clients-be.onrender.com";
+        properties = new ConfProperties();
+        RestAssured.baseURI = properties.getProperty("baseURI");
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
     }
 
-    @BeforeEach
-    public void setUpL() {
-        helper = new CompanyApiHelper();
-    }
-
+ 
+    
     @Test
     public void status200OnGetCompanies() {
         given()
@@ -45,11 +52,10 @@ public class CompanyContractTest {
     public void iCanAuth() {
         String body = """
                 {
-                      "username": "leonardo",
-                      "password": "leads"
+                      "username": "tecna",
+                      "password": "tecna-fairy"
                 }
                 """;
-
         given()
                 .basePath("/auth/login")
                 .body(body)
@@ -63,11 +69,11 @@ public class CompanyContractTest {
 
     @Test
     public void iCanCreateNewCompany() {
-        AuthResponse info = helper.auth("leonardo", "leads");
+        AuthResponse info = helper.auth(properties.getProperty("username"), properties.getProperty("password"));
 
-        CreateCompanyRequest createCompanyRequest = new CreateCompanyRequest("Innopolis", "Онлайн-курсы");
+        CreateCompanyRequest createCompanyRequest = new CreateCompanyRequest("TecnaSchool", "Онлайн-курсы");
 
-        given()
+        RestAssured.given()
                 .basePath("company")
                 .body(createCompanyRequest)
                 .header("x-client-token", info.userToken())
@@ -89,7 +95,8 @@ public class CompanyContractTest {
     @Test
     public void iCanDeleteCompany() {
 
-        CreateCompanyResponse response = (CreateCompanyResponse) helper.createCompany("Innopolis", "Онлайн-курсы");
+
+        CreateCompanyResponse response = (CreateCompanyResponse) helper.createCompany("TecnaSchool", "Онлайн-курсы");
         Response r = helper.deleteCompany(response.id());
 
         r.then().statusCode(200);

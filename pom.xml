@@ -101,7 +101,13 @@
       <artifactId>swagger-codegen-maven-plugin</artifactId>
       <version>3.0.61</version>
     </dependency>
-<!--    &lt;!&ndash; https://mvnrepository.com/artifact/io.swagger.codegen.v3/swagger-codegen-generators &ndash;&gt;-->
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-params</artifactId>
+      <version>5.11.0-M2</version>
+      <scope>test</scope>
+    </dependency>
+    <!--    &lt;!&ndash; https://mvnrepository.com/artifact/io.swagger.codegen.v3/swagger-codegen-generators &ndash;&gt;-->
 <!--    <dependency>-->
 <!--      <groupId>io.swagger.codegen.v3</groupId>-->
 <!--      <artifactId>swagger-codegen-generators</artifactId>-->

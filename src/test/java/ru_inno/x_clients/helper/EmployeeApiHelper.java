@@ -6,7 +6,7 @@ import io.restassured.http.ContentType;
 import ru_inno.x_clients.model.AuthRequest;
 import ru_inno.x_clients.model.AuthResponse;
 
-//login tecna password tecna-fairy
+
 public class EmployeeApiHelper {
 
     public AuthResponse auth(String username, String password) {

@@ -646,5 +646,6 @@
     <orderEntry type="library" name="Maven: com.github.jknack:handlebars:4.3.1" level="project" />
     <orderEntry type="library" name="Maven: org.commonmark:commonmark:0.17.0" level="project" />
     <orderEntry type="library" name="Maven: io.swagger.codegen.v3:swagger-codegen-generators:1.0.51" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.junit.jupiter:junit-jupiter-params:5.11.0-M2" level="project" />
   </component>
 </module>
